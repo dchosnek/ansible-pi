@@ -1,0 +1,17 @@
+- name: Retrieve list of users from passwd database
+  ansible.builtin.getent: 
+    database: passwd 
+    split: ':'
+
+- name: Display list of interactive users
+  ansible.builtin.debug: 
+    msg: "local users = {{ getent_passwd | dict2items | json_query('[? contains(value,`/bin/bash`)].key') | join(', ') }}"
+
+- name: Create directory called {{newdir}} for each non-root interactive user
+  ansible.builtin.file:
+    group: "{{ item  }}"
+    owner: "{{ item  }}"
+    mode: '0700'
+    path: "/home/{{ item }}/{{ newdir }}"
+    state: directory
+  loop: "{{ getent_passwd | dict2items | json_query('[? contains(value,`/bin/bash`)].key') | reject('search', 'root') }}"

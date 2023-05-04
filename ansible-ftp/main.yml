@@ -1,0 +1,13 @@
+---
+- name: Install and configure FTP
+  become: true
+  hosts: all
+  gather_facts: false
+  roles:
+  - role: add_user
+  - role: add_home_subdir
+    vars:
+      newdir: ftp
+  - vsftpd
+
+  # - role: remove_user 

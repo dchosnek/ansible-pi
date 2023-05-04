@@ -1,0 +1,9 @@
+- name: "Create user with username '{{ user_name }}'"
+  ansible.builtin.user:
+    create_home: true
+    move_home: true
+    name: "{{ user_name }}"
+    password: "{{ user_psswd | password_hash('sha512', user_salt) }}"
+    state: present
+    update_password: always   # will update passwords if they differ
+    # update_password: on_create
