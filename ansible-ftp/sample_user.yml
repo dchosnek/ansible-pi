@@ -1,4 +1,4 @@
 ---
-user_name: myuser
-user_psswd: mybadpassword
-user_salt: 8x8r7PPzcOvJpm3d
+user_list:
+  - name: myuser
+    password: mybadpassword

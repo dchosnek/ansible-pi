@@ -10,4 +10,6 @@
       newdir: ftp
   - vsftpd
 
-  # - role: remove_user 
+  # - role: remove_user
+  #   vars: 
+  #     user_name: pi

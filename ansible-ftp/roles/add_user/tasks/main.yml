@@ -1,9 +1,16 @@
-- name: "Create user with username '{{ user_name }}'"
+- name: Generate a random salt
+  set_fact:
+    random_salt: "{{ lookup('password', '/dev/null chars=ascii_lowercase,ascii_uppercase,digits length=16') }}"
+
+- name: Create specified users
   ansible.builtin.user:
     create_home: true
     move_home: true
-    name: "{{ user_name }}"
-    password: "{{ user_psswd | password_hash('sha512', user_salt) }}"
+    name: "{{ item.name }}"
+    password: "{{ item.password | password_hash('sha512', random_salt) }}"
     state: present
-    update_password: always   # will update passwords if they differ
-    # update_password: on_create
+    # update_password: always   # will update passwords if they differ
+    update_password: on_create
+  loop: "{{ user_list }}"
+  loop_control: 
+    label: "{{ item.name }}"
