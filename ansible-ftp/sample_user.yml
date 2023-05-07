@@ -1,4 +1,6 @@
 ---
 user_list:
-  - name: myuser
+  - name: myuser1
     password: mybadpassword
+  - name: myuser2
+    password: reallybadpassword
