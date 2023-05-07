@@ -4,12 +4,6 @@
   hosts: all
   gather_facts: false
   roles:
-  - role: add_user
-  - role: add_home_subdir
-    vars:
-      newdir: ftp
   - vsftpd
-
-  # - role: remove_user
-  #   vars: 
-  #     user_name: pi
+  - create_users
+  - create_ftp_directories
