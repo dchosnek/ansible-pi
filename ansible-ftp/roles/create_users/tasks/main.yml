@@ -1,0 +1,11 @@
+- name: Create specified users
+  ansible.builtin.user:
+    create_home: true
+    name: "{{ item.name }}"
+    password: "{{ item.password | password_hash('sha512', lookup('password', '/dev/null chars=ascii_lowercase,ascii_uppercase,digits length=16')) }}"
+    state: present
+    # update_password: always   # will update passwords if they differ
+    update_password: on_create
+  loop: "{{ user_list }}"
+  loop_control: 
+    label: "{{ item.name }}"
