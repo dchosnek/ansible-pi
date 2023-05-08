@@ -1,0 +1,7 @@
+---
+- name: Install and configure Samba
+  become: true
+  hosts: all
+  gather_facts: false
+  roles:
+  - configure_samba
