@@ -1,0 +1,7 @@
+- name: Copy local app profile to server
+  ansible.builtin.copy:
+    src: "{{ app }}.ini"
+    dest: "/etc/ufw/applications.d/{{ app }}.ini"
+    force: true         # file will be replaced when contents are different than the source
+    mode: '0644'
+    remote_src: false   # src file is on the controller node
