@@ -16,4 +16,12 @@ ports=2049,111/tcp|2049,111/udp
 
 This role will simply copy the specified `.ini` file from the role's `files` folder to each host. To start, I just created a file for `vsftpd` that specifies the TCP protocol on ports 20 and 21. No additional port ranges are specified for passive mode.
 
-Note: **This role does not configure UFW to use the application profile that it creates.**
+The `app` variable must contain the base name of a file in the `files` folder of this role. In the example below, it is expected that there be a file called `vsftpd.ini` locally in this role.
+
+```yaml
+- role: create_ufw_app_profile
+    vars:
+      app: vsftpd
+```
+
+Note: **This role does not configure UFW to use the application profile that it creates**. It just creates the profile.
