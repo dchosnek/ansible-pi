@@ -7,5 +7,5 @@
     # update_password: always   # will update passwords if they differ
     update_password: on_create
   loop: "{{ user_list }}"
-  loop_control: 
+  loop_control:
     label: "{{ item.name }}"

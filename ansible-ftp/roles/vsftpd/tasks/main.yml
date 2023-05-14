@@ -1,24 +1,26 @@
 - name: Install vsftpd package
-  ansible.builtin.apt: name=vsftpd state=present
+  ansible.builtin.apt:
+    name: vsftpd
+    state: present
 
 - name: Backup vsftpd.conf file
-  ansible.builtin.copy: 
-    src: /etc/vsftpd.conf 
+  ansible.builtin.copy:
+    src: /etc/vsftpd.conf
     dest: /etc/vsftpd.conf.bak
     force: false        # file will only be transferred if the destination does not exist
+    mode: '0644'
     remote_src: true    # src file is on the managed node
 
 - name: Copy local config file to FTP server
-  ansible.builtin.copy: 
-    src: vsftpd.conf 
+  ansible.builtin.copy:
+    src: vsftpd.conf
     dest: /etc/vsftpd.conf
     force: true         # file will be replaced when contents are different than the source
+    mode: '0644'
     remote_src: false   # src file is on the controller node
-  register: conf_file
-
-- name: Restart FTP service if config has changed
-  ansible.builtin.service: name=vsftpd state=restarted
-  when: conf_file.changed
+  notify: Restart FTP service
 
 - name: Enable FTP to start on reboot
-  ansible.builtin.service: name=vsftpd enabled=true
+  ansible.builtin.service:
+    name: vsftpd
+    enabled: true
