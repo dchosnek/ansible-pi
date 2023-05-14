@@ -3,6 +3,11 @@
     name: vsftpd
     state: present
 
+- name: Look for presence of vsftpd.conf file
+  ansible.builtin.stat:
+    path: /etc/vsftpd.conf
+  register: file
+
 - name: Backup vsftpd.conf file
   ansible.builtin.copy:
     src: /etc/vsftpd.conf
@@ -10,6 +15,7 @@
     force: false        # file will only be transferred if the destination does not exist
     mode: '0644'
     remote_src: true    # src file is on the managed node
+  when: file.stat.exists
 
 - name: Copy local config file to FTP server
   ansible.builtin.copy:
