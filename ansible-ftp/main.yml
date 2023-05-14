@@ -4,6 +4,12 @@
   hosts: all
   gather_facts: false
   roles:
-  - vsftpd
-  - create_users
-  - create_ftp_directories
+    - configure_vsftpd
+    - create_users
+    - create_ftp_directories
+    - role: create_ufw_app_profile
+      vars:
+        app: vsftpd
+    - role: configure_ufw
+      vars:
+        app: vsftpd
