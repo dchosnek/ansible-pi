@@ -1,0 +1,17 @@
+- name: Install ufw package
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+
+- name: Reject all traffic and allow SSH
+  community.general.ufw:
+    default: reject
+    state: enabled
+    rule: allow
+    name: OpenSSH
+
+- name: Allow specified app if app var is defined
+  community.general.ufw:
+    rule: allow
+    name: "{{ app }}"
+  when: app is defined
