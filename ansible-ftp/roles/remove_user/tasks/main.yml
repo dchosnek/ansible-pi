@@ -1,6 +1,0 @@
-- name: "Remove user with username '{{ user_name }}'"
-  ansible.builtin.user:
-    force: true
-    name: "{{ user_name }}"
-    remove: true
-    state: absent
