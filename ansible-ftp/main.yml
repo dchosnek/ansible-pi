@@ -10,6 +10,12 @@
     - role: create_ufw_app_profile
       vars:
         app: vsftpd
+    - role: create_ufw_app_profile
+      vars:
+        app: vnc01
     - role: configure_ufw
       vars:
         app: vsftpd
+    - role: configure_ufw
+      vars:
+        app: vnc01
