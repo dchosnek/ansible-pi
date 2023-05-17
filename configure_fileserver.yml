@@ -1,12 +1,19 @@
 ---
-- name: Install and configure FTP
+- name: Configure Raspberry Pi file server
   become: true
   hosts: all
   gather_facts: false
   roles:
+    - role: mount_usb
+      vars:
+        disk_name: sammy500
+        device: /dev/sda1
+
     - configure_vsftpd
     - create_users
     - create_ftp_directories
+    - configure_samba
+
     - role: create_ufw_app_profile
       vars:
         app: vsftpd
@@ -19,3 +26,6 @@
     - role: configure_ufw
       vars:
         app: vnc01
+    - role: configure_ufw
+      vars:
+        app: samba

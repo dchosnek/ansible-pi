@@ -1,0 +1,4 @@
+- name: Unmount the disk
+  ansible.posix.mount:
+    path: "/media/{{ ansible_user }}/{{ disk_name }}"
+    state: absent

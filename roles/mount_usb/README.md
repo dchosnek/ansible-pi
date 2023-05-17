@@ -1,28 +1,11 @@
-# Mount USB drive
+# Mount USB drive role
 
-This very simple playbook uses the `ansible.posix.mount` module to mount a disk and create a record in `fstab` so the mount persists through reboots.
+This very simple role uses the `ansible.posix.mount` module to mount a disk and create a record in `fstab` so the mount persists through reboots.
 
 The `passno` field indicates the order of file systems to be checked. File systems with a lower pass number are checked first. Common values used in the "passno" field are shown below. For my purposes, I set it to `0`.
 * 0: The file system is not checked.
 * 1: The file system is checked first.
 * 2: The file system is checked after the file systems with a pass number of 1.
-
-## Running the playbook
-
-This playbook will run on `all` hosts in the specified inventory file. The playbook is executed with the following command.
-
-```
-ansible-playbook -i inventory main.yml
-```
-
-## Inventory file
-
-The inventory file is fairly standard, but should include the `ansible_user` property to ensure proper connectivity to the remote host.
-
-```properties
-[ftp]
-192.168.1.100  ansible_user=ubuntu
-```
 
 ## Variables
 
