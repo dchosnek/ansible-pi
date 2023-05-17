@@ -1,3 +1,4 @@
+---
 - name: Install vsftpd package
   ansible.builtin.apt:
     name: vsftpd
