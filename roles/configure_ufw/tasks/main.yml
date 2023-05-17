@@ -1,3 +1,4 @@
+---
 - name: Install ufw package
   ansible.builtin.apt:
     name: ufw
@@ -13,5 +14,6 @@
 - name: Allow specified app if app var is defined
   community.general.ufw:
     rule: allow
-    name: "{{ app }}"
-  when: app is defined
+    name: "{{ item }}"
+  # if app_list is undefined, enable OpenSSH again
+  loop: "{{ app_list | default([OpenSSH]) }}"

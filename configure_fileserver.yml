@@ -22,10 +22,7 @@
         app: vnc01
     - role: configure_ufw
       vars:
-        app: vsftpd
-    - role: configure_ufw
-      vars:
-        app: vnc01
-    - role: configure_ufw
-      vars:
-        app: samba
+        app_list:
+          - vsftpd
+          - vnc01
+          - samba
