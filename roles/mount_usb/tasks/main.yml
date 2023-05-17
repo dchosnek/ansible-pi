@@ -10,3 +10,15 @@
     path: "/media/{{ ansible_user }}/{{ disk_name }}"
     src: "{{ device }}"
     state: mounted
+
+# allow other users to read and write this disk
+- name: "Set permissions for /media/{{ ansible_user }}"
+  ansible.builtin.file:
+    path: "/media/{{ ansible_user }}"
+    mode: '0755'
+
+# allow other users to read and write this disk
+- name: "Set permissions for mount point {{ disk_name }}"
+  ansible.builtin.file:
+    path: "/media/{{ ansible_user }}/{{ disk_name }}"
+    mode: '0755'
