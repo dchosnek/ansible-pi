@@ -4,6 +4,15 @@
     name: ufw
     state: present
 
+- name: Turn off IPv6 and backup config
+  ansible.builtin.lineinfile:
+    backup: true
+    line: IPV6=no
+    path: /etc/default/ufw
+    regexp: 'IPV6='
+    state: present
+  notify: Restart UFW service
+
 - name: Reject all traffic and allow SSH
   community.general.ufw:
     default: reject
