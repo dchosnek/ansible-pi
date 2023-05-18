@@ -16,7 +16,7 @@ It will also mount the attached USB drive and make that mount persistent across 
 
 ## Configure Plex media server
 
-*coming soon!*
+The `configure_plex.yml` playbook installs the Plex Media Server and configures UFW to allow the Plex management port so it can be managed from another host. This is a simple playbook so there is no additional documentation required.
 
 # Roles
 
