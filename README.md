@@ -27,6 +27,12 @@ Each role has its own README, so I will not duplicate that documentation here.
 The inventory file is standard, but should include the `ansible_user` property to ensure proper connectivity to the remote host. Here is an example of what the inventory file might look like.
 
 ```properties
-[pi]
-192.168.1.100  ansible_user=ubuntu
+[file]
+192.168.1.100  ansible_user=pi
+
+[plex:children]
+file
+
+[pihole]
+192.168.1.101 ansible_user=pi
 ```
