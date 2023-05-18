@@ -1,7 +1,7 @@
 ---
 - name: Configure Raspberry Pi file server
   become: true
-  hosts: all
+  hosts: file
   gather_facts: false
   roles:
     - role: mount_usb
