@@ -18,9 +18,9 @@
     remote_src: true    # src file is on the managed node
   when: file.stat.exists
 
-- name: Copy local config file to FTP server
-  ansible.builtin.copy:
-    src: vsftpd.conf
+- name: Copy local config template to FTP server
+  ansible.builtin.template:
+    src: vsftpd.j2
     dest: /etc/vsftpd.conf
     force: true         # file will be replaced when contents are different than the source
     mode: '0644'

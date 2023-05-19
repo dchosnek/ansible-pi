@@ -14,7 +14,7 @@ file_open_mode=0777
 
 # Set the FTP root directory
 chroot_local_user=YES
-local_root=/home/ftp
+local_root={{ ftp_path | dirname }}
 
 # Allow users to see hidden files
 force_dot_files=YES

@@ -11,9 +11,9 @@
     mode: '0644'
     remote_src: true    # src file is on the managed node
 
-- name: Copy local config file to samba server
-  ansible.builtin.copy:
-    src: smb.conf
+- name: Copy local config template to samba server
+  ansible.builtin.template:
+    src: smb.j2
     dest: /etc/samba/smb.conf
     force: true         # file will be replaced when contents are different than the source
     mode: '0644'
