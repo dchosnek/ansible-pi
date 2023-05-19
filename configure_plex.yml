@@ -5,12 +5,5 @@
   gather_facts: false
   roles:
     - install_plex
-
-    - role: create_ufw_app_profile
-      vars:
-        app: plex
-
-    - role: configure_ufw
-      vars:
-        app_list:
-          - plex
+    - create_ufw_app_profile
+    - configure_ufw
