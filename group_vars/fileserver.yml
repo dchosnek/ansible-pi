@@ -1,0 +1,9 @@
+---
+app_list:
+  - vsftpd
+  - vnc01
+  - samba
+disk_name: sammy500
+device: /dev/sda1
+samba_path: /home/ftp/shared
+ftp_path: /home/ftp/shared

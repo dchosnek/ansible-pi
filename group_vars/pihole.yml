@@ -1,0 +1,6 @@
+---
+app: vnc01
+app_list:
+  - dns
+  - www
+  - vnc01
