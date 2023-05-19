@@ -1,0 +1,24 @@
+---
+- name: Configure Plex Media Server on Raspberry Pi
+  become: true
+  hosts: pihole
+  gather_facts: false
+  roles:
+
+    - create_ufw_app_profile
+    - configure_ufw
+
+  tasks:
+
+    - name: Retrieve install script
+      ansible.builtin.get_url:
+        dest: "/home/{{ ansible_user }}/basic-install.sh"
+        url: https://install.pi-hole.net
+        group: "{{ ansible_user }}"
+        owner: "{{ ansible_user }}"
+        mode: '0700'
+      register: file
+
+    - name: Execute install script
+      ansible.builtin.debug:
+        msg: "The installer is interactive. You will have to execute /home/{{ ansible_user }}/basic-install.sh"
