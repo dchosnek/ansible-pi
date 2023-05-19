@@ -1,15 +1,15 @@
-- name: Create parent directory at /home/{{ parent | default('ftp') }}
+- name: Create parent directory at {{ ftp_path | dirname }}
   ansible.builtin.file:
     group: root
     owner: root
     mode: '0755'
-    path: "/home/{{ parent | default('ftp') }}"
+    path: "{{ ftp_path | dirname }}"
     state: directory
 
-- name: Create child directory {{ child | default('shared') }}
+- name: Create child directory {{ ftp_path }}
   ansible.builtin.file:
     group: ftp
     owner: ftp
     mode: '0777'
-    path: "/home/{{ parent | default('ftp') }}/{{ child | default('shared') }}"
+    path: "{{ ftp_path }}"
     state: directory
