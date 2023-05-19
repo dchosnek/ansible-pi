@@ -16,7 +16,11 @@ It will also mount the attached USB drive and make that mount persistent across 
 
 ## Configure Plex media server
 
-The `configure_plex.yml` playbook installs the Plex Media Server and configures UFW to allow the Plex management port so it can be managed from another host. This is a simple playbook so there is no additional documentation required.
+The `configure_plex.yml` playbook installs the Plex Media Server and configures UFW to allow the Plex management port so it can be managed from another host.
+
+## Configure Pi-hole
+
+The `configure_pihole.yml` playbook retrieves the Pi-hole install script and configures UFW to allow port 53 (DNS) and port 80 (Pi-hole management page). The playbook does not run the install script because the installation process is interactive. Instead, the playbook displays a message for the user to run the script.
 
 # Roles
 
