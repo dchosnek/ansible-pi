@@ -4,6 +4,10 @@ This repo contains playbooks and associated roles for configuring the Raspberry 
 
 # Playbooks
 
+## Add public key
+
+The `add_public_key.yml` playbook adds a single SSH public key to all hosts' `authorized_keys` file.
+
 ## Configure file server
 
 The `configure_fileserver.yml` playbook configures the following services:
@@ -14,13 +18,13 @@ The `configure_fileserver.yml` playbook configures the following services:
 
 It will also mount the attached USB drive and make that mount persistent across reboots. Check the [README](./CONFIGURE_FILESERVER.md) for more information.
 
-## Configure Plex media server
-
-The `configure_plex.yml` playbook installs the Plex Media Server and configures UFW to allow the Plex management port so it can be managed from another host.
-
 ## Configure Pi-hole
 
 The `configure_pihole.yml` playbook retrieves the Pi-hole install script and configures UFW to allow port 53 (DNS) and port 80 (Pi-hole management page). The playbook does not run the install script because the installation process is interactive. Instead, the playbook displays a message for the user to run the script.
+
+## Configure Plex media server
+
+The `configure_plex.yml` playbook installs the Plex Media Server and configures UFW to allow the Plex management port so it can be managed from another host.
 
 # Roles
 
