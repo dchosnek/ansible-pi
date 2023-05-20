@@ -1,0 +1,13 @@
+---
+- name: Add public key to hosts
+  become: true
+  hosts: all
+  gather_facts: false
+
+  tasks:
+
+    - name: "Add single SSH key from file to host for user {{ ansible_user }}"
+      ansible.posix.authorized_key:
+        user: "{{ ansible_user }}"
+        state: present
+        key: "{{ lookup('file', 'id_ed25519.pub') }}"
