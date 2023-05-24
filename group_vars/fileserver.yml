@@ -5,5 +5,6 @@ app_list:
   - samba
 disk_name: sammy500
 device: /dev/sda1
+public_share_path: "/media/{{ ansible_user }}/{{ disk_name }}/public"
 samba_path: /home/ftp/shared
 ftp_path: /home/ftp/shared

@@ -11,3 +11,12 @@
    browseable = yes
    create mask = 0777
    directory mask = 0777
+
+[public]
+   comment = locally public network share
+   path = {{ public_share_path }}
+   read only = no
+   guest ok = yes
+   browseable = yes
+   create mask = 0777
+   directory mask = 0777
