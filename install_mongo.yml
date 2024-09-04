@@ -1,0 +1,7 @@
+---
+- name: Set up MongoDB 7 community edition
+  become: true
+  hosts: mongo
+  gather_facts: true
+  roles:
+    - configure_mongodb

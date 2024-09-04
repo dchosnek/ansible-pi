@@ -1,0 +1,4 @@
+- name: Restart mongo service
+  ansible.builtin.service:
+    name: mongod
+    state: restarted

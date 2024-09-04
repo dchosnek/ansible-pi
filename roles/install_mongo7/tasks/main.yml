@@ -1,0 +1,50 @@
+---
+# Ensure /usr/share/keyrings directory exists
+- name: Ensure /usr/share/keyrings/ directory exists
+  ansible.builtin.file:
+    path: /usr/share/keyrings
+    state: directory
+    mode: '0755'
+
+# Download the MongoDB 7.0 GPG key and save it as a .gpg file
+- name: Download MongoDB 7.0 GPG key and convert to .gpg using gpg --dearmor
+  ansible.builtin.shell: |
+    curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | gpg --dearmor -o /usr/share/keyrings/mongodb-server-7.0.gpg
+  args:
+    creates: /usr/share/keyrings/mongodb-server-7.0.gpg
+  become: yes
+
+# Add the MongoDB 7.0 repository with signed-by keyring
+- name: Add MongoDB 7.0 repository with signed-by keyring
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg] https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/7.0 multiverse"
+    state: present
+    filename: 'mongodb-org-7.0.list'
+
+# Update the apt package cache
+- name: Update APT cache
+  ansible.builtin.apt:
+    update_cache: yes
+
+# Install MongoDB 7.0
+- name: Install MongoDB 7.0 packages
+  ansible.builtin.apt:
+    name: mongodb-org
+    state: present
+
+# Use the local configuration file and trigger a restart if there are changes
+- name: Copy MongoDB configuration file to the target
+  ansible.builtin.template:
+    src: mongodb.conf.j2
+    dest: /etc/mongod.conf
+    owner: mongodb
+    group: mongodb
+    mode: '0644'
+  notify: Restart mongo service
+
+# Start and enable MongoDB service
+- name: Ensure MongoDB is running and enabled on boot
+  ansible.builtin.systemd:
+    name: mongod
+    state: started
+    enabled: yes
