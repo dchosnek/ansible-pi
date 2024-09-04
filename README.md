@@ -1,6 +1,6 @@
-# Ansible playbooks and roles for Raspberry Pi
+# Ansible playbooks and roles for Ubuntu & Raspberry Pi
 
-This repo contains playbooks and associated roles for configuring the Raspberry Pi running Debian 11 (bullseye) with Ansible 2.14.4 for different purposes. The playbooks contained at the root of this repository mostly call **roles** in this repository rather than executing tasks themselves.
+This repo contains playbooks and associated roles for configuring Ubuntu VMs or Raspberry Pi running Debian 11 (bullseye) with Ansible 2.14.4 for different purposes. The playbooks contained at the root of this repository mostly call **roles** in this repository rather than executing tasks themselves.
 
 # Playbooks
 

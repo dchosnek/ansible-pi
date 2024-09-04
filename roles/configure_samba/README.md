@@ -4,8 +4,11 @@ This role will install, configure, and enable the Samba file service. The config
 
 ## Intended configuration
 
-The current configuration file is intended to provide read/write access to a shared directory without authentication. Anyone browsing the network will be able to access this share.
+The current configuration file is intended to provide read/write access to two shared directories without authentication. Anyone browsing the network will be able to access these shares.
 
 ## Variables
 
-This role uses a single variable `samba_path` to specify the directory that will be shared.
+This role uses two variables to specify the two directories that will be shared:
+
+* `public_share_path`
+* `samba_path`
