@@ -1,0 +1,6 @@
+package_list:
+- Flask
+- flask-cors
+- gunicorn
+- pyjwt
+- pymongo
