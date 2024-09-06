@@ -1,0 +1,44 @@
+---
+- name: Install Node.js and npm
+  ansible.builtin.apt:
+    name:
+      - nodejs
+      - npm
+    state: present
+    update_cache: yes
+
+- name: Download git repo
+  ansible.builtin.git:
+    repo: "{{ github_react }}"
+    dest: "{{ ansible_env.HOME }}/react"
+    version: main         # branch
+    depth: 1      # no need to download history
+    single_branch: true
+    update: true
+    force: true
+
+- name: Install npm dependencies
+  ansible.builtin.command:
+    cmd: npm install
+    chdir: "{{ ansible_env.HOME }}/react"
+
+- name: Create new .env file with current IP address
+  ansible.builtin.template:
+      src: react_app_ip.j2
+      dest: "{{ ansible_env.HOME }}/react/.env"
+
+- name: Build the react app
+  ansible.builtin.command:
+    cmd: npm run build
+    chdir: "{{ ansible_env.HOME }}/react"
+
+- name: Copy build directory to /var/www/html/
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/react/build/"  # Source directory (ensure the trailing slash)
+    dest: /var/www/html/  # Destination directory
+    remote_src: yes
+
+- name: Delete local copy of react project
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/react"
+    state: absent
