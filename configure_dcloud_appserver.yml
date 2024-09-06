@@ -1,0 +1,9 @@
+---
+- name: Configure the app server
+  become: true
+  hosts: binappserver
+  gather_facts: true
+  roles:
+    - flask
+    - deploy_react_app
+    - nginx
