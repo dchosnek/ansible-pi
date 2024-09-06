@@ -4,3 +4,5 @@ package_list:
 - gunicorn
 - pyjwt
 - pymongo
+github_react: "https://github.com/dchosnek/bin-api-tutorial-react.git"
+github_flask: "https://github.com/dchosnek/bin-api-tutorial-flask.git"
