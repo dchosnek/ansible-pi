@@ -29,7 +29,7 @@
 
 - name: Clone the Flask app from GitHub
   ansible.builtin.git:
-    repo: "https://github.com/dchosnek/bin-api-tutorial-flask.git"
+    repo: "{{ github_flask }}"
     dest: /opt/flask_app
     version: main         # branch
     depth: 1      # no need to download history
